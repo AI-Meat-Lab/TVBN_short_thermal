@@ -165,16 +165,16 @@ def calculate_bio_repeat(data):
 
 # ---------------------- 2. main() ------------------------
 def main():
-    df = pd.read_excel(r"D:\Learning\Doctor\IMM\IMM_202510_beef\TVBN_202602\temperature_exp.xlsx")
+    df = pd.read_excel(r"temperature_exp.xlsx")
     # calculate all repeat
     df_result_all_mean,df_result_all_test = calculate_all_repeat(df)
     # calculate the bio repeat
     df_result_bio_mean, df_result_bio_test = calculate_bio_repeat(df)
-    with pd.ExcelWriter(r"D:\Learning\Doctor\IMM\IMM_202510_beef\TVBN_202602\temperature_exp_analysis_n=18.xlsx",engine='openpyxl') as writer:
+    with pd.ExcelWriter(r"../data/temperature_exp_analysis_n=18.xlsx",engine='openpyxl') as writer:
         df.to_excel(writer,sheet_name='original_data',index=False)
         df_result_all_mean.to_excel(writer, sheet_name='mean_sd', index=False)
         df_result_all_test.to_excel(writer, sheet_name='test', index=False)
-    with pd.ExcelWriter(r"D:\Learning\Doctor\IMM\IMM_202510_beef\TVBN_202602\temperature_exp_analysis_n=6.xlsx",engine='openpyxl') as writer:
+    with pd.ExcelWriter(r"../data/temperature_exp_analysis_n=6.xlsx",engine='openpyxl') as writer:
         df.to_excel(writer,sheet_name='original_data',index=False)
         df_result_bio_mean.to_excel(writer, sheet_name='mean_sd', index=False)
         df_result_bio_test.to_excel(writer, sheet_name='test', index=False)
