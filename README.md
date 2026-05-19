@@ -14,7 +14,7 @@ The code performs:
 | File | Description |
 |------|-------------|
 | `Temperature_TVBN_calculation.py` | Main analysis script. Computes summary statistics, performs Mann‑Whitney U tests, applies FDR correction, and exports results for both technical (n=18) and biological (n=6) replicates. |
-| `tvbn line chart.py` | Plotting script. Generates the TVB‑N line plot (error bars = standard deviation). **Note:** This script currently uses the all‑replicates (n=18) summary data; the paper reports biological‑replicate (n=6) means and SDs. See *Known Issues* below. |
+| `tvbn line chart.py` | Plotting script. Generates the TVB‑N line plot (error bars = standard deviation). 
 
 ---
 
@@ -77,43 +77,13 @@ Each output file contains three sheets:
 The plotting script `tvbn line chart.py` currently uses **hard‑coded mean and SD values from the n=18 analysis**.  
 To reproduce the **paper’s Figure 2** (which uses biological‑replicate SDs), you have two options:
 
-#### Option A: Modify the plotting script
-Replace the hard‑coded `TVBN_mean` and `TVBN_std` arrays with the values from the `mean_sd` sheet of `temperature_exp_analysis_n=6.xlsx`.  
-Example for beef at 15°C (from n=6 analysis): mean ≈ 9.223, std ≈ 0.387 (as reported in Table 1).
-
-#### Option B: Use the n=6 output directly
-Read the `mean_sd` sheet from the n=6 Excel file and plot dynamically. A revised plotting script is suggested below (see *Recommended improvements*).
-
-To run the script as‑is (which produces a plot with smaller error bars matching n=18 data):
+To run the script as‑is:
 
 ```bash
-python tvbn\ line\ chart.py
+python tvbn_line_chart.py
 ```
 
 The figure is saved as `TVBN_lineplot_final.tiff`.
-
----
-
-## Known Issues & Discrepancies with the Paper
-
-1. **Error bar source**  
-   The manuscript’s Figure 2 and Table 1 report standard deviations calculated from **6 biological replicates** (each the mean of 3 technical replicates).  
-   The provided plotting script `tvbn line chart.py` uses standard deviations from **all 18 individual measurements** (technical replicates only).  
-   → **Fix:** Use the `mean_sd` sheet from `temperature_exp_analysis_n=6.xlsx` for plotting.
-
-2. **File path hard‑coding**  
-   Both scripts contain absolute Windows paths (e.g., `D:\Learning\...`).  
-   → **Fix:** Replace with relative paths or a configurable variable.
-
-3. **Input file name mismatch**  
-   `Temperature_TVBN_calculation.py` expects `temperature_exp.xlsx` but the provided file is named `Raw data_+Calculation（n=18）.xlsx`.  
-   → **Fix:** Change the `pd.read_excel()` argument to the correct filename.
-
-4. **Redundant column parsing**  
-   The script re‑creates `Biological_parallelism` and `Technical_parallelism` by splitting the `ID` column, even though these columns already exist in the Excel file. This does not cause errors but is unnecessary.
-
-5. **Unused function**  
-   `meat_vs_temperature_ttest()` is defined but never called. No effect on output.
 
 ---
 
