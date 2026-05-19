@@ -1,4 +1,4 @@
-# README for Short Thermal Exposure Effects on Measured TVB-N
+# Short Thermal Exposure Effects on Measured TVB-N
 
 This repository contains code and data to reproduce the statistical analysis and figures in the manuscript:
 
