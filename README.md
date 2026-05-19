@@ -75,9 +75,7 @@ Each output file contains three sheets:
 ### 3. Generate the line plot
 
 The plotting script `tvbn line chart.py` currently uses **hard‑coded mean and SD values from the n=18 analysis**.  
-To reproduce the **paper’s Figure 2** (which uses biological‑replicate SDs), you have two options:
-
-To run the script as‑is:
+To reproduce the **paper’s Figure 2** (which uses biological‑replicate SDs), run the script as‑is:
 
 ```bash
 python tvbn_line_chart.py
